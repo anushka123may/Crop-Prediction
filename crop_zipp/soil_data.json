@@ -1,0 +1,128 @@
+{
+  "Bihar": {
+    "Nitrogen": 40,
+    "Phosphorus": 45,
+    "Potassium": 35,
+    "pH": 6.5
+  },
+  "Punjab": {
+    "Nitrogen": 55,
+    "Phosphorus": 50,
+    "Potassium": 45,
+    "pH": 7.2
+  },
+  "Uttar Pradesh": {
+    "Nitrogen": 48,
+    "Phosphorus": 42,
+    "Potassium": 38,
+    "pH": 6.8
+  },
+  "Maharashtra": {
+    "Nitrogen": 42,
+    "Phosphorus": 38,
+    "Potassium": 40,
+    "pH": 6.4
+  },
+  "Madhya Pradesh": {
+    "Nitrogen": 45,
+    "Phosphorus": 44,
+    "Potassium": 42,
+    "pH": 6.6
+  },
+  "Rajasthan": {
+    "Nitrogen": 35,
+    "Phosphorus": 32,
+    "Potassium": 30,
+    "pH": 7.5
+  },
+  "West Bengal": {
+    "Nitrogen": 52,
+    "Phosphorus": 48,
+    "Potassium": 45,
+    "pH": 6.2
+  },
+  "Gujarat": {
+    "Nitrogen": 38,
+    "Phosphorus": 40,
+    "Potassium": 35,
+    "pH": 7.0
+  },
+  "Karnataka": {
+    "Nitrogen": 44,
+    "Phosphorus": 41,
+    "Potassium": 43,
+    "pH": 6.3
+  },
+  "Tamil Nadu": {
+    "Nitrogen": 46,
+    "Phosphorus": 43,
+    "Potassium": 41,
+    "pH": 6.5
+  },
+  "Andhra Pradesh": {
+    "Nitrogen": 43,
+    "Phosphorus": 45,
+    "Potassium": 39,
+    "pH": 6.7
+  },
+  "Haryana": {
+    "Nitrogen": 50,
+    "Phosphorus": 48,
+    "Potassium": 44,
+    "pH": 7.1
+  },
+  "Odisha": {
+    "Nitrogen": 47,
+    "Phosphorus": 44,
+    "Potassium": 40,
+    "pH": 6.4
+  },
+  "Kerala": {
+    "Nitrogen": 54,
+    "Phosphorus": 46,
+    "Potassium": 48,
+    "pH": 5.8
+  },
+  "Telangana": {
+    "Nitrogen": 41,
+    "Phosphorus": 39,
+    "Potassium": 37,
+    "pH": 6.6
+  },
+  "Jharkhand": {
+    "Nitrogen": 39,
+    "Phosphorus": 41,
+    "Potassium": 36,
+    "pH": 6.2
+  },
+  "Assam": {
+    "Nitrogen": 53,
+    "Phosphorus": 47,
+    "Potassium": 46,
+    "pH": 5.9
+  },
+  "Chhattisgarh": {
+    "Nitrogen": 44,
+    "Phosphorus": 42,
+    "Potassium": 40,
+    "pH": 6.5
+  },
+  "Uttarakhand": {
+    "Nitrogen": 46,
+    "Phosphorus": 43,
+    "Potassium": 41,
+    "pH": 6.4
+  },
+  "Himachal Pradesh": {
+    "Nitrogen": 48,
+    "Phosphorus": 45,
+    "Potassium": 43,
+    "pH": 6.2
+  },
+  "Default": {
+    "Nitrogen": 45,
+    "Phosphorus": 42,
+    "Potassium": 40,
+    "pH": 6.5
+  }
+}

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body style="font-family: 'Segoe UI', Arial; background: linear-gradient(to right, #eef2ff, #f8fafc); padding:40px;">
+
+    <div style="max-width:650px; margin:auto; background:white; padding:35px; border-radius:16px; box-shadow:0 10px 25px rgba(0,0,0,0.08);">
+
+        <h2 style="text-align:center; margin-bottom:10px;">
+            🌱 Crop Recommendation Result
+        </h2>
+
+        <p style="text-align:center; color:#666; margin-top:0;">
+            Smart AI-Based Agricultural Advisory System
+        </p>
+
+        <hr style="margin:25px 0;">
+
+        <!-- Crop Result -->
+        <div style="margin-bottom:20px;">
+            <h3 style="margin:0;">
+                🌾 Best Crop:
+                <span style="color:#2e7d32; font-weight:bold;">
+                    {{ crop }}
+                </span>
+            </h3>
+        </div>
+
+        <!-- Fertilizer Result -->
+        <div style="margin-bottom:20px;">
+            <h3 style="margin:0;">
+                🧪 Recommended Fertilizer:
+                <span style="color:#ef6c00; font-weight:bold;">
+                    {{ fertilizer }}
+                </span>
+            </h3>
+        </div>
+
+        <!-- ⭐ ACCURACY CARD -->
+        <div style="background:#eef2ff; padding:18px; border-radius:12px; text-align:center; margin-top:25px; border-left:5px solid #3f51b5;">
+            <h3 style="margin:0; font-size:20px;">
+                🎯 Model Accuracy:
+                <span style="color:#3f51b5; font-weight:bold;">
+                    {{ accuracy if accuracy else "N/A" }}%
+                </span>
+            </h3>
+            <p style="margin:5px 0 0 0; font-size:13px; color:#555;">
+                Based on testing dataset performance
+            </p>
+        </div>
+
+        <!-- Suggestions -->
+        {% if smart_suggestion %}
+        <div style="margin-top:25px; background:#f1f8e9; padding:15px; border-radius:10px; border-left:5px solid #66bb6a;">
+            <h4 style="margin-top:0;">💡 Smart Suggestions</h4>
+            <p style="margin-bottom:0;">{{ smart_suggestion }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Back Button -->
+        <div style="text-align:center; margin-top:35px;">
+            <a href="/" 
+               style="text-decoration:none; background:#667eea; color:white; padding:12px 25px; border-radius:10px; font-weight:500; transition:0.3s;">
+                🔙 Back to Home
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation Result</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Animated background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-100px) translateX(50px); }
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            margin: 20px auto;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px 30px;
+            text-align: center;
+            animation: zoomIn 0.6s ease-out;
+            margin-bottom: 20px;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon {
+            font-size: 5em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .crop-result {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .crop-name {
+            font-size: 3em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .crop-icon {
+            font-size: 4em;
+            margin-bottom: 10px;
+        }
+
+        .fertilizer-result {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .fertilizer-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .fertilizer-name {
+            font-size: 2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .soil-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-section h3 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .info-item i {
+            color: #667eea;
+            width: 20px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-custom {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-secondary-custom {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary-custom:hover {
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Smart Suggestion Box */
+        .suggestion-box {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .suggestion-box h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .suggestion-box p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        /* Did You Know Tip Box */
+        .tip-box {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tip-box h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tip-box p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        /* WhatsApp Button */
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            color: white;
+        }
+
+        .btn-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .container {
+                margin: 10px auto;
+            }
+
+            .result-card {
+                padding: 25px 20px;
+            }
+            
+            .crop-name {
+                font-size: 2em;
+            }
+
+            .fertilizer-name {
+                font-size: 1.5em;
+            }
+
+            .soil-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-container {
+                grid-template-columns: 1fr;
+            }
+
+            .suggestion-box, .tip-box {
+                padding: 15px;
+            }
+
+            .suggestion-box h3, .tip-box h3 {
+                font-size: 1em;
+            }
+
+            .suggestion-box p, .tip-box p {
+                font-size: 0.9em;
+            }
+
+            .success-icon {
+                font-size: 3.5em;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="result-card">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h1>Recommendation Ready!</h1>
+            <p class="subtitle">Based on your soil and climate conditions</p>
+
+            <div class="crop-result">
+                <div class="crop-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div>Best Crop to Grow:</div>
+                <div class="crop-name" id="cropName">{{ crop }}</div>
+            </div>
+
+            <div class="fertilizer-result">
+                <div class="fertilizer-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div>Recommended Fertilizer:</div>
+                <div class="fertilizer-name">{{ fertilizer }}</div>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-chart-line"></i> Your Soil Analysis</h3>
+                <div class="soil-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Nitrogen (N)</div>
+                        <div class="stat-value">{{ n_value }} kg/ha</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Phosphorus (P)</div>
+                        <div class="stat-value">{{ p_value }} kg/ha</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Potassium (K)</div>
+                        <div class="stat-value">{{ k_value }} kg/ha</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Soil Type</div>
+                        <div class="stat-value">{{ soil_type }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-lightbulb"></i> Why This Combination?</h3>
+                <div class="info-item">
+                    <i class="fas fa-check"></i>
+                    <span>Optimal crop match for your soil nutrients</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check"></i>
+                    <span>Fertilizer suited for {{ soil_type }} soil</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check"></i>
+                    <span>Best yield potential in your climate</span>
+                </div>
+            </div>
+
+            <!-- Smart Suggestion Box -->
+            {% if smart_suggestion %}
+            <div class="suggestion-box">
+                <h3><i class="fas fa-lightbulb"></i> Smart Suggestions</h3>
+                <p>{{ smart_suggestion }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Did You Know Tip -->
+            <div class="tip-box">
+                <h3><i class="fas fa-info-circle"></i> Did You Know?</h3>
+                <p id="tip"></p>
+            </div>
+
+            <div class="btn-container">
+                <a href="/" class="btn-custom btn-primary-custom">
+                    <i class="fas fa-redo"></i> Try Another
+                </a>
+                <button class="btn-custom btn-whatsapp" onclick="shareWhatsapp()">
+                    <i class="fab fa-whatsapp"></i> Share via WhatsApp
+                </button>
+                <a href="#" class="btn-custom btn-secondary-custom" onclick="window.print(); return false;">
+                    <i class="fas fa-download"></i> Save Result
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create animated particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 60 + 20 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Confetti effect on load
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#4CAF50', '#FFC107', '#FF5722'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        // Trigger confetti on page load
+        window.addEventListener('load', createConfetti);
+
+        // WhatsApp Share Function
+        function shareWhatsapp() {
+            const crop = document.getElementById('cropName').textContent.trim();
+            const fertilizer = '{{ fertilizer }}';
+            const temp = '{{ temp }}';
+            const soilType = '{{ soil_type }}';
+            const humidity = '{{ hum }}';
+            const rainfall = '{{ rain }}';
+            
+            const message = `🌱 *Crop Recommendation Results*\n\n` +
+                          `✅ Recommended Crop: *${crop}*\n` +
+                          `💧 Fertilizer: *${fertilizer}*\n` +
+                          `🌡️ Temperature: ${temp}°C\n` +
+                          `💦 Humidity: ${humidity}%\n` +
+                          `🌧️ Rainfall: ${rainfall}mm\n` +
+                          `🏞️ Soil Type: ${soilType}\n\n` +
+                          `Generated by Crop and Fertilizer Advisor 🌾`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Did You Know - Random Agricultural Tips
+        const agriculturalTips = [
+            "🌱 Crop rotation helps maintain soil fertility and reduces pest buildup. Try rotating between legumes and cereals!",
+            "💧 Morning irrigation (6-8 AM) reduces water loss through evaporation by up to 30%.",
+            "🐛 Companion planting can naturally repel pests. For example, marigolds protect tomatoes from harmful insects.",
+            "🌾 Mulching with organic materials conserves soil moisture and suppresses weeds naturally.",
+            "🔄 Green manuring with legumes adds nitrogen to soil and improves soil structure organically.",
+            "📊 Soil testing every 2-3 years helps optimize fertilizer use and saves costs.",
+            "🌿 Vermicompost is 5 times richer in nitrogen than regular compost and improves soil health.",
+            "☀️ Proper spacing between plants ensures adequate sunlight and air circulation, reducing disease risk.",
+            "💰 Drip irrigation can save up to 60% water compared to flood irrigation while increasing yields.",
+            "🦠 Crop residue management prevents disease carryover and adds organic matter to soil."
+        ];
+
+        // Display random tip
+        function displayRandomTip() {
+            const randomIndex = Math.floor(Math.random() * agriculturalTips.length);
+            document.getElementById('tip').textContent = agriculturalTips[randomIndex];
+        }
+
+        // Load tip on page load
+        window.addEventListener('load', displayRandomTip);
+
+        // Add crop-specific emoji
+        const cropName = document.getElementById('cropName').textContent.toLowerCase().trim();
+        const cropEmojis = {
+            'rice': '🌾',
+            'maize': '🌽',
+            'chickpea': '🫘',
+            'kidneybeans': '🫘',
+            'pigeonpeas': '🫛',
+            'mothbeans': '🫘',
+            'mungbean': '🫛',
+            'blackgram': '🫘',
+            'lentil': '🫘',
+            'pomegranate': '🍎',
+            'banana': '🍌',
+            'mango': '🥭',
+            'grapes': '🍇',
+            'watermelon': '🍉',
+            'muskmelon': '🍈',
+            'apple': '🍎',
+            'orange': '🍊',
+            'papaya': '🍈',
+            'coconut': '🥥',
+            'cotton': '☁️',
+            'jute': '🌿',
+            'coffee': '☕'
+        };
+
+        const cropIcon = document.querySelector('.crop-icon i');
+        if (cropEmojis[cropName]) {
+            cropIcon.parentElement.innerHTML = '<div class="crop-icon">' + cropEmojis[cropName] + '</div>';
+        }
+    </script>
+</body>
+</html> -->
